@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, request
+from conn import DbConn
 
 app = Flask(__name__)
 
@@ -26,7 +27,9 @@ def get_task(model_id, task_id):
         return '获取:%s-%s' % (model_id, task_id)
     if request.method == 'POST':
         data = request.data
-        return '创建:%s-%s-%s' % (model_id, task_id, data)
+        sql = "select * from res_partner"
+        res_partner = DbConn(sql).pgConn()
+        return '创建:%s-%s-%s' % (model_id, task_id, res_partner)
     if request.method == 'PUT':
         data = request.data
         return '更新:%s-%s-%s' % (model_id, task_id, data)
