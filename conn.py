@@ -17,19 +17,14 @@ class DbConn:
         :param sql:
         :return:
         """
+        conn = psycopg2.connect(database=app.config['DBNAME'], user=app.config['DBUSER'], password=app.config['DBPASSWORD'], host=app.config['DBURL'], port=app.config['DBPORT'])
+        cursor = conn.cursor()
         try:
-            conn = psycopg2.connect(database=app.config['DBNAME'], user=app.config['DBUSER'], password=app.config['DBPASSWORD'], host=app.config['DBURL'], port=app.config['DBPORT'])
-            cursor = conn.cursor()
             cursor.execute(self.sql)
-            conn.commit()
-            return cursor.fetchall()
+            coloumns = [row[0] for row in cursor.description]
+            result = [[str(item) for item in row] for row in cursor.fetchall()]
+            return [dict(zip(coloumns, row)) for row in result]
+        except Exception as ex:
+            print(ex)
         finally:
-            self.pgClose(conn)
-
-    def pgClose(self, conn):
-        """
-        断开数据库链接
-        :param conn:
-        :return:
-        """
-        conn.close()
+            conn.close()
