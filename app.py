@@ -9,7 +9,9 @@ app = Flask(__name__)
 @app.route('/restful/api/<string:model_id>/<int:task_id>', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def get_task(model_id, task_id):
     if request.method == 'GET':
-        return '获取:%s-%s' % (model_id, task_id)
+        # return '获取:%s-%s' % (model_id, task_id)
+        obj = {"total": 2, "rows": [{'firstname': "1", 'lastname': "567657657"}, {'firstname': "2", 'lastname': "二"}]};
+        return obj
     if request.method == 'POST':
         data = request.data
         sql = "select * from res_partner"

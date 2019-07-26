@@ -15,7 +15,7 @@
     <p>Click the buttons on datagrid toolbar to do crud actions.</p>
 
     <table id="dg" title="My Users" class="easyui-datagrid" style="width:700px;height:250px"
-            url="/get/user"
+            url=""
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">
         <thead>
@@ -35,6 +35,15 @@
 
     <script type="text/javascript">
         $(document).ready(function(){
+            $.ajax({
+                type: 'GET',
+                url: '/restful/api/user/1', // this is the url for backend java program
+                data: '9999', // the data you want to post to backend.
+                success: function(result){
+                    console.log(result);
+                    $('#dg').datagrid('loadData',result);
+                }
+            });
           $('#dg').datagrid({
                 url:''
            });
