@@ -11,66 +11,56 @@
     <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
 </head>
 <body>
-    <table id="dg" title="My Users" class="easyui-datagrid" style="width:700px;height:250px"
-           url=""
-           toolbar="#toolbar" pagination="true"
-           rownumbers="true" fitColumns="true" singleSelect="true">
-        <thead>
-        <tr>
-            <th field="firstname" width="50">First Name</th>
-            <th field="lastname" width="50">Last Name</th>
-            <th field="phone" width="50">Phone</th>
-            <th field="email" width="50">Email</th>
-        </tr>
-        </thead>
-    </table>
-    <div id="toolbar">
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">New User</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">Edit User</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">Remove User</a>
+    <div id="cc" class="easyui-layout" data-options="fit:true">
+{#        <div id="north" data-options="region:'north'" style="height:40px;padding:10px">北部区域</div>#}
+{#        <div id="west" data-options="region:'west',split:true,title:'西'" style="width:180px;padding:10px;">西部区域内容</div>#}
+{#        <div id="south" data-options="region:'south',border:false" style="height:20px;padding:1px;">南部区域</div>#}
+{#        <div id="center" data-options="region:'center',title:'中'"></div>#}
+{#        <div id="east"></div>#}
+        <div data-options="region:'north'" style="height:50px"></div>
+        <div data-options="region:'south',split:true" style="height:50px;"></div>
+        <div data-options="region:'east',split:true" title="East" style="width:100px;"></div>
+        <div data-options="region:'west',split:true" title="West" style="width:100px;"></div>
+        <div data-options="region:'center',title:'Center'"></div>
     </div>
-    <div id="indexPage" style="width:500px; height:500px;"></div>
+
     <script type="text/javascript">
         $(document).ready(function(){
-            $.ajax({
-                type: 'GET',
-                url: '/restful/api/user/1', // this is the url for backend java program
-                data: '9999', // the data you want to post to backend.
-                success: function(result){
-                    console.log(result);
-                    $('#dg').datagrid('loadData',result);
-                }
-            });
-            $('#dg').datagrid({
-                url:''
-            });
             // 动态加载页面
-            $("#indexPage").layout();
-            $("#indexPage").layout('add', {
-                region: 'north',
-                title: '北',
-                heigth: 60
+            // 1、重置属性
+            $("#north").layout();
+            $('#north').layout('resize', {
+                border: true,
             });
-            $("#indexPage").layout('add', {
-                region: 'south',
-                title: '南',
-                heigth: 100
-            });
-            $("#indexPage").layout('add', {
+            // 2、动态创建
+            $("#").layout('add', {
                 region: 'east',
-                title: '西',
-                width: 100
-            });
-            $("#indexPage").layout('add', {
-                region: 'west',
                 title: '东',
-                width: 100
+                width: 200
             });
-            $("#indexPage").layout('add', {
-                region: 'center',
-                title: '中'
+            $('#cc').layout('add', {
+                region: 'west',
+                title: '东：动态',
+                width: 100
             });
         });
+        function addPanel(){
+            var region = $('#region').val();
+            var options = {
+                region: region
+            };
+            if (region=='north' || region=='south'){
+                options.height = 50;
+            } else {
+                options.width = 100;
+                options.split = true;
+                options.title = $('#region option:selected').text();
+            }
+            $('#cc').layout('add', options);
+        }
+        function removePanel(){
+            $('#cc').layout('remove', $('#region').val());
+        }
     </script>
 </body>
 </html>
