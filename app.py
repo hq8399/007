@@ -29,6 +29,11 @@ def user():
     return render_template('user.html')
 
 
+@app.route('/index')
+def index():
+    return render_template('index.html')
+
+
 @app.route('/get/user', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def get_user():
     obj = {"total": 2, "rows": [{'firstname': "1", 'lastname': "一"}, {'firstname': "2", 'lastname': "二"}]};
