@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Index Application - jQuery EasyUI CRUD Demo</title>
+    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/color.css">
+    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/demo/demo.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+</head>
+<body>
+    <table id="dg" title="My Users" class="easyui-datagrid" style="width:700px;height:250px"
+           url=""
+           toolbar="#toolbar" pagination="true"
+           rownumbers="true" fitColumns="true" singleSelect="true">
+        <thead>
+        <tr>
+            <th field="firstname" width="50">First Name</th>
+            <th field="lastname" width="50">Last Name</th>
+            <th field="phone" width="50">Phone</th>
+            <th field="email" width="50">Email</th>
+        </tr>
+        </thead>
+    </table>
+    <div id="toolbar">
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">New User</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">Edit User</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">Remove User</a>
+    </div>
+    <div id="indexPage" style="width:500px; height:500px;"></div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $.ajax({
+                type: 'GET',
+                url: '/restful/api/user/1', // this is the url for backend java program
+                data: '9999', // the data you want to post to backend.
+                success: function(result){
+                    console.log(result);
+                    $('#dg').datagrid('loadData',result);
+                }
+            });
+            $('#dg').datagrid({
+                url:''
+            });
+            // 动态加载页面
+            $("#indexPage").layout();
+            $("#indexPage").layout('add', {
+                region: 'north',
+                title: '北',
+                heigth: 60
+            });
+            $("#indexPage").layout('add', {
+                region: 'south',
+                title: '南',
+                heigth: 100
+            });
+            $("#indexPage").layout('add', {
+                region: 'east',
+                title: '西',
+                width: 100
+            });
+            $("#indexPage").layout('add', {
+                region: 'west',
+                title: '东',
+                width: 100
+            });
+            $("#indexPage").layout('add', {
+                region: 'center',
+                title: '中'
+            });
+        });
+    </script>
+</body>
+</html>
