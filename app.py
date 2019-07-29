@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, request, render_template
+import json
 from conn import DbConn
 
 app = Flask(__name__)
@@ -38,6 +39,44 @@ def index():
 def get_user():
     obj = {"total": 2, "rows": [{'firstname': "1", 'lastname': "一"}, {'firstname': "2", 'lastname': "二"}]};
     return obj
+
+
+@app.route('/menu/tree', methods=['GET', 'POST', 'PUT', 'DELETE'])
+def init_menu_tree():
+    obj = [{
+        "id": 1,
+        "text": "Folder1",
+        "iconCls": "icon-save",
+        "children": [{
+            "text": "File1",
+            "checked": True
+        }, {
+            "text": "Books",
+            "state": "open",
+            "attributes": {
+                "url": "/demo/book/abc",
+                "price": 100
+            },
+            "children": [{
+                "text": "PhotoShop",
+                "checked": True
+            }, {
+                "id": 8,
+                "text": "Sub Bookds",
+                "state": "closed"
+            }]
+        }]
+    }, {
+        "text": "Languages",
+        "state": "closed",
+        "children": [{
+            "text": "Java"
+        }, {
+            "text": "C#"
+        }]
+    }]
+    json_obj = json.dumps(obj)
+    return json_obj
 
 
 if __name__ == '__main__':

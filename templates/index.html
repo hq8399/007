@@ -15,7 +15,9 @@
         <div data-options="region:'north'" style="height:50px"></div>
         <div data-options="region:'south',split:true" style="height:50px;"></div>
         <div data-options="region:'east',split:true" title="East" style="width:100px;"></div>
-        <div data-options="region:'west',split:true" title="West" style="width:100px;"></div>
+        <div data-options="region:'west',split:true" title="West" style="width:100px;">
+            <ul id="tt"></ul>
+        </div>
         <div data-options="region:'center',title:'Center'"></div>
     </div>
 
@@ -37,6 +39,10 @@
                 region: 'west',
                 title: '西：动态',
                 width: 100
+            });
+            alert("tree");
+            $('#tt').tree({
+                url:'/menu/tree'
             });
         });
         function addPanel(){
