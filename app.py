@@ -48,9 +48,11 @@ def init_menu_tree():
         "text": "Folder1",
         "iconCls": "icon-save",
         "children": [{
+            "id": 2,
             "text": "File1",
             "checked": True
         }, {
+            "id": 3,
             "text": "Books",
             "state": "open",
             "attributes": {
@@ -58,6 +60,7 @@ def init_menu_tree():
                 "price": 100
             },
             "children": [{
+                "id": 4,
                 "text": "PhotoShop",
                 "checked": True
             }, {
@@ -67,11 +70,14 @@ def init_menu_tree():
             }]
         }]
     }, {
+        "id": 9,
         "text": "Languages",
         "state": "closed",
         "children": [{
+            "id": 10,
             "text": "Java"
         }, {
+            "id": 11,
             "text": "C#"
         }]
     }]
