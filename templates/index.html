@@ -13,9 +13,9 @@
 <body>
     <div id="cc" class="easyui-layout" data-options="fit:true">
         <div data-options="region:'north'" style="height:50px"></div>
-        <div data-options="region:'south',split:true" style="height:50px;"></div>
+        <div data-options="region:'south',split:true" style="height:20px;"></div>
         <div data-options="region:'east',split:true" title="East" style="width:100px;"></div>
-        <div data-options="region:'west',split:true" title="West" style="width:100px;">
+        <div data-options="region:'west',split:true" title="West" style="width:200px;">
             <ul id="tt"></ul>
         </div>
         <div data-options="region:'center',title:'Center'">
@@ -46,16 +46,14 @@
                 title: '西：动态',
                 width: 100
             });
-            alert("tree");
             $('#tt').tree({
                 url:'/menu/tree'
             });
             $('#tt').tree({
                 onClick: function(node){
-                    alert(node.text);  // alert node text property when clicked
+                    // alert(node.text);  // alert node text property when clicked
                     // add a new tab panel
                     var tabArray = $('#tb').tabs("tabs");
-                    console.log(tabArray);
                     var count=0;
                     if(tabArray.length != 0){
                         for ( var i = 0; i < tabArray.length; i++) {

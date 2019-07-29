@@ -47,6 +47,7 @@ def init_menu_tree():
         "id": 1,
         "text": "Folder1",
         "iconCls": "icon-save",
+        "state": "closed",
         "children": [{
             "id": 2,
             "text": "File1",
@@ -72,13 +73,13 @@ def init_menu_tree():
     }, {
         "id": 9,
         "text": "Languages",
-        "state": "closed",
+        "state": "open",
         "children": [{
             "id": 10,
-            "text": "Java"
+            "text": "列表"
         }, {
             "id": 11,
-            "text": "C#"
+            "text": "表单"
         }]
     }]
     json_obj = json.dumps(obj)
