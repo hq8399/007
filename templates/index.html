@@ -20,7 +20,7 @@
         </div>
         <div data-options="region:'center',title:'Center'">
             <div id="tb" class="easyui-tabs" fit="true">
-                <div title="首页" id="0" style="padding:1px;display:none;">
+                <div title="首页" id="0" style="">
                     tab1
                 </div>
             </div>
@@ -63,10 +63,12 @@
                             }
                         }
                         if(count == 0){
+                            console.log(node);
+                            var content = '<iframe scrolling="auto" frameborder="0"  src="'+node.attributes['url']+'" style="width:100%;height:100%;"></iframe>';
                             $('#tb').tabs('add',{
                                 id: node.id,
                                 title: node.text,
-                                content:'Tab Body',
+                                content:content,
                                 selected: true,
                                 closable:true,
                                 tools:[{

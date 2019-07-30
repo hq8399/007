@@ -35,6 +35,11 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/list', methods=['GET', 'POST', 'PUT', 'DELETE'])
+def list():
+    return render_template('list.html')
+
+
 @app.route('/get/user', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def get_user():
     obj = {"total": 2, "rows": [{'firstname': "1", 'lastname': "一"}, {'firstname': "2", 'lastname': "二"}]};
@@ -76,7 +81,10 @@ def init_menu_tree():
         "state": "open",
         "children": [{
             "id": 10,
-            "text": "列表"
+            "text": "列表",
+            "attributes": {
+                "url": "/list",
+            },
         }, {
             "id": 11,
             "text": "表单"
